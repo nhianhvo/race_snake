@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1315 918">
+    <!-- Nền trời -->
+    <rect width="1315" height="918" fill="#87CEEB"/>
+    
+    <!-- Mặt trời -->
+    <circle cx="100" cy="100" r="50" fill="#FFD700"/>
+    
+    <!-- Mây -->
+    <path d="M200 150 Q250 100 300 150 Q350 100 400 150 Q350 200 300 150 Q250 200 200 150" fill="white"/>
+    <path d="M800 100 Q850 50 900 100 Q950 50 1000 100 Q950 150 900 100 Q850 150 800 100" fill="white"/>
+    
+    <!-- Đường đua lớn hơn -->
+    <rect x="0" y="240" width="1315" height="480" fill="#333333"/>
+    <rect x="0" y="240" width="1315" height="8" fill="white" opacity="0.5"/>
+    <rect x="0" y="712" width="1315" height="8" fill="white" opacity="0.5"/>
+    
+    <!-- Vạch kẻ đường -->
+    <g fill="white">
+        <rect x="50" y="495" width="100" height="15"/>
+        <rect x="200" y="495" width="100" height="15"/>
+        <rect x="350" y="495" width="100" height="15"/>
+        <rect x="500" y="495" width="100" height="15"/>
+        <rect x="650" y="495" width="100" height="15"/>
+        <rect x="800" y="495" width="100" height="15"/>
+        <rect x="950" y="495" width="100" height="15"/>
+        <rect x="1100" y="495" width="100" height="15"/>
+    </g>
+    
+    <!-- Cổng Finish kiểu caro -->
+<!-- Cột trái -->
+<rect x="1100" y="250" width="10" height="460" fill="#6a6868"/>
+<!-- Cột phải -->
+<rect x="1200" y="250" width="10" height="460" fill="#6a6868"/>
+
+<!-- Băng finish kiểu caro -->
+<g transform="translate(1100, 250)">
+  <!-- Tạo pattern caro -->
+  <defs>
+    <pattern id="checkerPattern" width="20" height="20" patternUnits="userSpaceOnUse">
+      <rect width="10" height="10" fill="white"/>
+      <rect x="10" y="0" width="10" height="10" fill="black"/>
+      <rect x="0" y="10" width="10" height="10" fill="black"/>
+      <rect x="10" y="10" width="10" height="10" fill="white"/>
+    </pattern>
+  </defs>
+  
+  <!-- Áp dụng pattern vào băng finish -->
+  <rect width="100" height="460" fill="url(#checkerPattern)"/>
+</g>
+
+<text 
+  x="1250" 
+  y="500" 
+  font-size="40" 
+  fill="white" 
+  style="font-weight: bold;"
+  transform="rotate(90, 1250, 500)"
+  text-anchor="middle"
+>FINISH</text>
+    
+    <!-- Trang trí Tết -->
+    <!-- Đèn lồng -->
+    <g>
+        <circle cx="100" cy="200" r="30" fill="#FF0000"/>
+        <circle cx="300" cy="200" r="30" fill="#FFD700"/>
+        <circle cx="500" cy="200" r="30" fill="#FF0000"/>
+        <circle cx="700" cy="200" r="30" fill="#FFD700"/>
+        <circle cx="900" cy="200" r="30" fill="#FF0000"/>
+    </g>
+    
+    <!-- Hoa mai -->
+    <g fill="#FFD700">
+        <path d="M50 150 L80 120 L50 90 L20 120 Z"/>
+        <path d="M250 150 L280 120 L250 90 L220 120 Z"/>
+        <path d="M450 150 L480 120 L450 90 L420 120 Z"/>
+        <path d="M650 150 L680 120 L650 90 L620 120 Z"/>
+        <path d="M850 150 L880 120 L850 90 L820 120 Z"/>
+    </g>
+    
+    <!-- Dây liễn -->
+    <path d="M0 100 Q657.5 50 1315 100" stroke="#FF0000" stroke-width="5" fill="none"/>
+    
+    <!-- Pháo -->
+    <g fill="#FF4500">
+        <rect x="50" y="750" width="20" height="40"/>
+        <rect x="250" y="750" width="20" height="40"/>
+        <rect x="450" y="750" width="20" height="40"/>
+        <rect x="650" y="750" width="20" height="40"/>
+        <rect x="850" y="750" width="20" height="40"/>
+        <rect x="1050" y="750" width="20" height="40"/>
+    </g>
+</svg>

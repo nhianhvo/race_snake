@@ -1,0 +1,360 @@
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.app {
+  max-width: none;
+  margin: 0;
+  padding: 1rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.horse-form {
+  margin: 0.5rem 0;
+}
+
+.horse-form input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  margin-right: 1rem;
+  width: 150px;
+}
+
+.race-track {
+  position: relative;
+  width: 100%;
+  height: 85%;
+  margin: 20px 0;
+  overflow: hidden;
+}
+
+.track-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.lane {
+  width: 100%;
+  height: 33.33%;
+  border-bottom: 2px dashed #fff;
+  background: linear-gradient(
+    to bottom,
+    #2ecc71 0%,    /* Dải cỏ trên */
+    transparent 10%,
+    transparent 90%,
+    #2ecc71 100%   /* Dải cỏ dưới */
+  );
+}
+
+.lane:last-child {
+  border-bottom: none; /* Bỏ đường kẻ cuối cùng */
+}
+
+.decorations {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Đảm bảo các decoration không cản trở */
+}
+
+.decoration {
+  position: absolute;
+  font-size: 24px;
+}
+
+.decoration-1 {
+  top: 10px;
+  left: 50px;
+}
+
+.decoration-2 {
+  top: 50px;
+  left: 200px;
+}
+
+.decoration-3 {
+  top: 120px;
+  left: 400px;
+}
+
+@keyframes move {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.decoration {
+  animation: move 10s linear infinite;
+}
+
+.decoration-1 {
+  animation-duration: 8s;
+}
+
+.decoration-2 {
+  animation-duration: 12s;
+}
+
+.decoration-3 {
+  animation-duration: 10s;
+}
+
+.horse {
+  position: absolute;
+  font-size: 2.5rem;
+  transition: left 0.1s linear;
+  transform: scaleX(-1);
+}
+
+.horse-number {
+  position: absolute;
+  left: 50%;
+  top: -25px;
+  transform: translateX(-50%);
+  background: #333;
+  color: white;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+button:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+.winners {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+}
+
+h1 {
+  margin: 0.5rem 0;
+}
+
+.snake {
+  position: absolute;
+  transition: left 0.1s linear;
+  height: 60px; /* Tăng khoảng cách giữa các con rắn */
+  display: flex;
+  align-items: center;
+}
+
+.snake-body {
+  position: relative;
+  width: 200px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+/* Đốt rắn với gradient */
+.snake-segment {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  background: linear-gradient(45deg, var(--snake-color), var(--snake-secondary-color, #fff));
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Vị trí các đốt */
+.segment-0 { left: 160px; }
+.segment-1 { left: 125px; }
+.segment-2 { left: 90px; }
+.segment-3 { left: 55px; }
+.segment-4 { left: 20px; }
+
+/* Đầu rắn dễ thương */
+.snake-head {
+  position: absolute;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  background: var(--snake-color);
+  border-radius: 20px;
+  z-index: 2;
+}
+
+/* Mắt rắn */
+.snake-eyes {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 2px rgba(0,0,0,0.3);
+}
+
+.snake-eyes::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: #000;
+  border-radius: 50%;
+}
+
+.snake-eyes.left {
+  top: 10px;
+  right: 22px;
+}
+
+.snake-eyes.right {
+  top: 10px;
+  right: 6px;
+}
+
+/* Miệng cười */
+.snake-mouth {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  width: 16px;
+  height: 8px;
+  border: 2px solid #000;
+  border-radius: 0 0 15px 15px;
+  border-top: 0;
+}
+
+/* Số thứ tự trên mũ */
+.snake-number {
+  position: absolute;
+  right: 5px;
+  top: -30px;
+  background: #fff;
+  color: #333;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  z-index: 4;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  border: 2px solid var(--snake-color);
+}
+
+/* Animation bò */
+.snake.crawling .snake-body {
+  animation: crawl 0.8s infinite ease-in-out;
+}
+
+.snake.crawling .snake-segment {
+  animation: wiggle 0.8s infinite ease-in-out;
+}
+
+@keyframes crawl {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes wiggle {
+  0% { transform: translateY(0); }
+  25% { transform: translateY(-4px); }
+  50% { transform: translateY(0); }
+  75% { transform: translateY(4px); }
+  100% { transform: translateY(0); }
+}
+
+/* Animation delay cho từng đốt */
+.segment-0 { animation-delay: 0s !important; }
+.segment-1 { animation-delay: 0.1s !important; }
+.segment-2 { animation-delay: 0.2s !important; }
+.segment-3 { animation-delay: 0.3s !important; }
+.segment-4 { animation-delay: 0.4s !important; }
+
+/* Vảy rắn */
+.snake-scales {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(0,0,0,0.1) 0%,
+      transparent 50%
+    );
+  background-size: 20px 20px;
+  border-radius: 15px;
+}
+
+/* Mũ rắn */
+.snake-hat {
+  position: absolute;
+  right: -5px;
+  top: -20px;
+  width: 45px;
+  height: 25px;
+  background: #e74c3c;
+  border-radius: 20px 20px 0 0;
+  z-index: 3;
+}
