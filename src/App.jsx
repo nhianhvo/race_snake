@@ -56,45 +56,42 @@ function App() {
       ...snake,
       position: 0,
       isMoving: true,
+      isWinner: false,
       currentSpeed: 1 + Math.random() * 0.8
     })))
 
     raceIntervalRef.current = setInterval(() => {
       setSnakes(prevSnakes => {
         const newSnakes = prevSnakes.map(snake => {
-          if (!snake.isMoving && !winners.includes(snake)) return snake;
+          if (!snake.isMoving && !snake.isWinner) return snake;
 
           const speedChange = Math.random() * 1.4 - 0.4;
           var newSpeed = Math.max(0.3, Math.min(2, snake.currentSpeed + speedChange));
           var newPosition = snake.position + Math.random() * 0.8
 
-          // Kiểm tra winner
           if (newPosition >= 71 && winners.length === 0) {
             setWinners([snake])
             
-            // Dừng các snake khác
             prevSnakes.forEach(s => {
               if (s.id !== snake.id) {
                 s.isMoving = false
-                s.currentSpeed = 0
               }
             })
 
-            // Winner tiếp tục chạy nhanh hơn
             return {
               ...snake,
               position: newPosition,
               isMoving: true,
-              currentSpeed: newSpeed * 2  // Tăng tốc độ lên gấp đôi
+              isWinner: true,
+              currentSpeed: 3 + Math.random() * 2
             }
           }
 
-          // Nếu là winner, tiếp tục chạy
-          if (winners.length > 0 && winners[0].id === snake.id) {
+          if (snake.isWinner) {
             return {
               ...snake,
               position: Math.min(100, newPosition),
-              currentSpeed: newSpeed * 2
+              currentSpeed: 3 + Math.random() * 2
             }
           }
 
@@ -105,15 +102,14 @@ function App() {
           }
         })
 
-        // Chỉ dừng khi winner đến vạch đích
-        const winnerSnake = newSnakes.find(s => winners[0]?.id === s.id)
+        const winnerSnake = newSnakes.find(s => s.isWinner)
         if (winnerSnake && winnerSnake.position >= 100) {
           clearInterval(raceIntervalRef.current)
         }
 
         return newSnakes
       })
-    }, 50)  // Giảm interval xuống để mượt hơn
+    }, 50)
   }
 
   const handleReset = () => {
