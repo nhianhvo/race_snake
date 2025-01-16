@@ -163,7 +163,7 @@ function App() {
     margin: '10px 0'
   }}>
     <img 
-      src="/src/assets/logo.png" 
+      src="/assets/logo.png" 
       alt="Racing Logo" 
       style={{
         width: '150px',
@@ -218,7 +218,7 @@ function App() {
   </button>
 </div>
       
-      <div className="race-track" style={{ backgroundImage: `url("/src/assets/tet-racing-track.svg")`,
+      <div className="race-track" style={{ backgroundImage: `url("/assets/tet-racing-track.svg")`,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center'}}>
