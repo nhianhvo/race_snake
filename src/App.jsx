@@ -8,6 +8,7 @@ function App() {
   const [winners, setWinners] = useState([])
   const [winner, setWinner] = useState(null)
   const raceIntervalRef = useRef(null);
+  const hasWinnerRef = useRef(false);
 
 
   const generateSnakes = (count) => {
@@ -50,27 +51,37 @@ function App() {
   const startRace = () => {
     setIsRacing(true)
     setWinners([])
-    setSnakes(prevSnakes => prevSnakes.map(snake => ({
-      ...snake,
-      isMoving: true,
-      currentSpeed: 1 + Math.random() * 0.8 // Tốc độ ban đầu từ 1-1.5
-    })))
+    hasWinnerRef.current = false
+    console.log('Race started')
+
+    setSnakes(prevSnakes => {
+      console.log('Initial speeds:', prevSnakes.map(s => ({id: s.id, speed: 1 + Math.random() * 0.8})))
+      return prevSnakes.map(snake => ({
+        ...snake,
+        isMoving: true,
+        currentSpeed: 1 + Math.random() * 0.8
+      }))
+    })
+
     raceIntervalRef.current = setInterval(() => {
       setSnakes(prevSnakes => {
         const newSnakes = prevSnakes.map(snake => {
-          if (!snake.isMoving) return snake; // Nếu rắn đã dừng thì giữ nguyên
+          if (!snake.isMoving) return snake;
 
-          const speedChange = Math.random() * 1.4 - 0.4; // -0.2 đến 0.2
+          const speedChange = Math.random() * 1.4 - 0.4;
           var newSpeed = Math.max(0.3, Math.min(2, snake.currentSpeed + speedChange));
-  
           var newPosition = snake.position + Math.random() * 0.8
   
-          // Kiểm tra winner
-          if (newPosition >= 71 && winners.length === 0) {
+          console.log(`Snake ${snake.id}: pos=${newPosition.toFixed(2)}, speed=${newSpeed.toFixed(2)}`)
+  
+          if (newPosition >= 71 && !hasWinnerRef.current) {
+            console.log(`Winner found: Snake ${snake.id}`)
+            hasWinnerRef.current = true
             setWinners([snake])
             newSpeed = 3 + Math.random() * 2
             newPosition = snake.position + Math.random() * 2
-            // Dừng tất cả rắn khác
+            
+            console.log('Stopping other snakes')
             prevSnakes.forEach(s => {
               if (s.id !== snake.id) {
                 s.isMoving = false
@@ -79,13 +90,16 @@ function App() {
             })
           }
   
-  
           return {
             ...snake,
             position: Math.min(100, newPosition),
             currentSpeed: newSpeed
           }
         })
+  
+        if (hasWinnerRef.current) {
+          clearInterval(raceIntervalRef.current)
+        }
   
         return newSnakes
       })
