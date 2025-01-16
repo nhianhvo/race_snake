@@ -29,11 +29,11 @@ function App() {
       id: index + 1,
       name: `${index + 1}`,
       position: 0,
-      lane: (index * (70 / count)) + 15, // Tăng khoảng cách giữa các rắn
+      lane: (index * (70 / count)) + 15,
       color: colorPairs[index % colorPairs.length][0],
       secondaryColor: colorPairs[index % colorPairs.length][1],
       isMoving: false,
-      currentSpeed: 1 + Math.random() * 0.8 // Tốc độ ban đầu từ 1-1.5
+      currentSpeed: 1 + Math.random() * 0.8 
     }))
     setSnakes(newSnakes)
   }
@@ -53,14 +53,14 @@ function App() {
     setSnakes(prevSnakes => prevSnakes.map(snake => ({
       ...snake,
       isMoving: true,
-      currentSpeed: 1 + Math.random() * 0.8 // Tốc độ ban đầu từ 1-1.5
+      currentSpeed: 1 + Math.random() * 0.8
     })))
     raceIntervalRef.current = setInterval(() => {
       setSnakes(prevSnakes => {
         const newSnakes = prevSnakes.map(snake => {
-          if (!snake.isMoving) return snake; // Nếu rắn đã dừng thì giữ nguyên
+          if (!snake.isMoving) return snake;
 
-          const speedChange = Math.random() * 1.4 - 0.4; // -0.2 đến 0.2
+          const speedChange = Math.random() * 1.4 - 0.4;
           var newSpeed = Math.max(0.3, Math.min(2, snake.currentSpeed + speedChange));
   
           var newPosition = snake.position + Math.random() * 0.8
