@@ -62,35 +62,42 @@ function App() {
 
     raceIntervalRef.current = setInterval(() => {
       setSnakes(prevSnakes => {
+        // Tìm winner hiện tại nếu có
+        const currentWinner = prevSnakes.find(s => s.isWinner)
+        
+        // Xử lý winner trước
+        if (currentWinner) {
+          return prevSnakes.map(snake => {
+            if (snake.id === currentWinner.id) {
+              const newPosition = snake.position + Math.random() * 2
+              return {
+                ...snake,
+                position: Math.min(100, newPosition),
+                currentSpeed: 3 + Math.random() * 2
+              }
+            }
+            return snake
+          })
+        }
+
+        // Nếu chưa có winner, xử lý tất cả
         const newSnakes = prevSnakes.map(snake => {
-          if (!snake.isMoving && !snake.isWinner) return snake;
+          if (!snake.isMoving) return snake;
 
           const speedChange = Math.random() * 1.4 - 0.4;
           var newSpeed = Math.max(0.3, Math.min(2, snake.currentSpeed + speedChange));
           var newPosition = snake.position + Math.random() * 0.8
 
-          if (newPosition >= 71 && winners.length === 0) {
+          // Kiểm tra winner mới
+          if (newPosition >= 71 && !prevSnakes.some(s => s.isWinner)) {
             setWinners([snake])
             
-            prevSnakes.forEach(s => {
-              if (s.id !== snake.id) {
-                s.isMoving = false
-              }
-            })
-
+            // Dừng các snake khác
             return {
               ...snake,
               position: newPosition,
               isMoving: true,
               isWinner: true,
-              currentSpeed: 3 + Math.random() * 2
-            }
-          }
-
-          if (snake.isWinner) {
-            return {
-              ...snake,
-              position: Math.min(100, newPosition),
               currentSpeed: 3 + Math.random() * 2
             }
           }
@@ -102,8 +109,16 @@ function App() {
           }
         })
 
-        const winnerSnake = newSnakes.find(s => s.isWinner)
-        if (winnerSnake && winnerSnake.position >= 100) {
+        // Nếu vừa có winner mới, dừng các snake khác
+        const newWinner = newSnakes.find(s => s.isWinner)
+        if (newWinner) {
+          return newSnakes.map(snake => 
+            snake.id === newWinner.id ? snake : { ...snake, isMoving: false }
+          )
+        }
+
+        // Kiểm tra kết thúc
+        if (newWinner && newWinner.position >= 100) {
           clearInterval(raceIntervalRef.current)
         }
 
